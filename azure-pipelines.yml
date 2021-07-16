@@ -1,0 +1,38 @@
+trigger:
+- master
+
+jobs:
+
+- job: 'Build_onnx_mlir_Windows'
+  timeoutInMinutes: 240
+  pool:
+    kevins-agent-pool
+  strategy:
+    maxParallel: 4
+
+  steps:
+  - checkout: self
+    clean: true
+    submodules: recursive
+    path: onnx-mlir
+
+  - script: |
+      call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+      call onnx-mlir\utils\install-protobuf.cmd
+    displayName: Install protobuf
+    workingDirectory: $(Agent.BuildDirectory)
+  - script: |
+      call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+      call onnx-mlir\utils\install-mlir.cmd
+    displayName: Install mlir
+    workingDirectory: $(Agent.BuildDirectory)
+  - script: |
+      call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+      call onnx-mlir\utils\build-onnx-mlir.cmd
+    displayName: Install onnx-mlir
+    workingDirectory: $(Agent.BuildDirectory)
+  - script: |
+      call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+      call onnx-mlir\utils\check-onnx-mlir.cmd
+    displayName: Test onnx-mlir
+    workingDirectory: $(Agent.BuildDirectory)
