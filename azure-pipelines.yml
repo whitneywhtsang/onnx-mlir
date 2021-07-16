@@ -1,5 +1,5 @@
 trigger:
-- master
+- test-CI
 
 jobs:
 
