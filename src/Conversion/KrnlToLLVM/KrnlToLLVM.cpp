@@ -1682,7 +1682,7 @@ public:
     // Get a symbol reference to the runtime function to use, creating one if
     // necessary.
     ModuleOp parentModule = findIndexOp->getParentOfType<ModuleOp>();
-    auto FindIndexRef = getOrInsertFindIndex(
+    FlatSymbolRefAttr FindIndexRef = getOrInsertFindIndex(
         rewriter, parentModule, findIndexOp.input().getType());
 
     // Select the value to pass to as the first argument based on the operator
@@ -1716,7 +1716,7 @@ public:
     Value length = operandAdaptor.len();
 
     // Generate the call to the runtime function.
-    Type retType = IntegerType::get(context, 32);
+    Type retType = IntegerType::get(context, 64);
     auto funcCall = rewriter.create<CallOp>(loc, FindIndexRef, retType,
         ArrayRef<Value>({firstOperand, extractedGPtr, extractedVPtr, length}));
 
@@ -1756,8 +1756,8 @@ private:
     if (optFuncDecl.hasValue())
       return optFuncDecl.getValue();
 
-    // Create 'find_index_*' signature: `i32 ([i8*|i64], i32*, i32*, i32)`
-    Type fnType = LLVM::LLVMFunctionType::get(i32Type,
+    // Create 'find_index_*' signature: `i64 ([i8*|i64], i32*, i32*, i32)`
+    Type fnType = LLVM::LLVMFunctionType::get(i64Type,
         ArrayRef<Type>({firstArgType, i32PtrType, i32PtrType, i32Type}), false);
 
     // Insert the function declaration the module.
