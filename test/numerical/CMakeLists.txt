@@ -55,37 +55,7 @@ llvm_update_compile_flags(rapidcheck)
 
 set(TEST_LINK_LIBS rapidcheck CompilerUtils ExecutionSession)
 
-add_numerical_unittest(TestConv
-  TestConv.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestMatMul2D
-  TestMatMul2D.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestGemm
-  TestGemm.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestLSTM
-  TestLSTM.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestRNN
-  TestRNN.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestGRU
-  TestGRU.cpp
-  LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
-  )
-
-add_numerical_unittest(TestLoop
-  TestLoop.cpp
+add_numerical_unittest(TestCategoryMapper
+  TestCategoryMapper.cpp
   LINK_LIBS PRIVATE ${TEST_LINK_LIBS}
   )

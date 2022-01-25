@@ -244,8 +244,9 @@ bool isOMConvTheSameAsNaiveImplFor(const int N, const int C, const int H,
   module.push_back(entryPoint);
 
   OwningModuleRef moduleRef(module);
+  if (compileModule(moduleRef, ctx, SHARED_LIB_BASE, onnx_mlir::EmitLib) != 0)
+    return false;
 
-  compileModule(moduleRef, ctx, SHARED_LIB_BASE, onnx_mlir::EmitLib);
   onnx_mlir::ExecutionSession sess(
       getSharedLibName(SHARED_LIB_BASE), "run_main_graph");
 

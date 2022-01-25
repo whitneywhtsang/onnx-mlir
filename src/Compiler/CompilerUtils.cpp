@@ -307,23 +307,28 @@ void setTargetCPU(const std::string &cpu) { mcpu = cpu; }
 void setTargetArch(const std::string &arch) { march = arch; }
 void setTargetTriple(const std::string &triple) { mtriple = triple; }
 void setOptLevel(const OptLevel level) { OptimizationLevel = level; }
+void setVerboseOuput(const bool val) { VerboseOutput = val; }
 
-static void setCompilerKeyValue(const OptionKind key, const string val) {
+static void setCompilerKeyValue(const OptionKind key, const string &val) {
   switch (key) {
   case OptionKind::TargetTriple:
     setTargetTriple(val);
-    return;
+    break;
   case OptionKind::TargetArch:
     setTargetArch(val);
-    return;
+    break;
   case OptionKind::TargetCPU:
     setTargetCPU(val);
-    return;
-  case OptionKind::CompilerOptLevel:
+    break;
+  case OptionKind::CompilerOptLevel: {
     int level = atoi(val.c_str());
     assert(level >= 0 && level <= 3 && "expected an OptLevel in [0..3] range");
     setOptLevel((OptLevel)level);
-    return;
+  } break;
+  case OptionKind::Verbose: {
+    bool verbose = atoi(val.c_str());
+    setVerboseOuput(verbose);
+  } break;
   }
   // In case there are options that were added but are unknown here, just ignore
   // them.

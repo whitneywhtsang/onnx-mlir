@@ -26,21 +26,17 @@ enum InputIRLevelType {
 };
 
 /* Compiler optimization level (traditional -O0 ... -O3 flags) */
-enum OptLevel {
-  O0 = 0,
-  O1,
-  O2,
-  O3
-};
+enum OptLevel { O0 = 0, O1, O2, O3 };
 
-/* Compiler options to describe the architecture, optimization level,... */
+/* Compiler options to describe the architecture, optimization level, ... */
 enum OptionKind {
-  TargetTriple,     /* Kind for mtriple string. */
-  TargetArch,       /* Kind for march string. */
-  TargetCPU,        /* Kind for mcpu string. */
-  CompilerOptLevel, /* Kind for '0'...'3' string describing OptLevel. */
+  TargetTriple,     /* Kind for -mtriple string. */
+  TargetArch,       /* Kind for -march string. */
+  TargetCPU,        /* Kind for -mcpu string. */
+  CompilerOptLevel, /* Kind for '-O0'...'-O3'. */
+  Verbose,          /* Kind for -v. */
 };
 
 } // namespace onnx_mlir
 
-#endif
+#endif // ONNX_MLIR_OMCOMPILERTYPES_H
