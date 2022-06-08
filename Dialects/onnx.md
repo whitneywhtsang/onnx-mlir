@@ -1777,9 +1777,6 @@ The "onnx.EntryPoint" function indicates the main entry point of ONNX model.
 | Attribute | MLIR Type | Description |
 | :-------: | :-------: | ----------- |
 | `func` | ::mlir::SymbolRefAttr | symbol reference attribute
-| `numInputs` | ::mlir::IntegerAttr | 32-bit signless integer attribute
-| `numOutputs` | ::mlir::IntegerAttr | 32-bit signless integer attribute
-| `signature` | ::mlir::StringAttr | string attribute
 
 ### `onnx.Equal` (::mlir::ONNXEqualOp)
 
@@ -4326,6 +4323,34 @@ Effects: MemoryEffects::Effect{}
 | Result | Description |
 | :----: | ----------- |
 | `Y` | tensor of 64-bit signless integer values or memref of any type values
+
+### `onnx.NoValue` (::mlir::ONNXNoneOp)
+
+An operation representing the absence of a value.
+
+This operation can be used to represent the absence of a value. It is typically 
+used as an argument to operators that have optional parameters.
+Example:
+  %cst = "onnx.NoValue"() {value} : () -> none
+  %0, %1 = "onnx.Split"(%arg0, %cst) { axis=1 : si64 } : (tensor<?xf32>, none) -> (tensor<*xf32>, tensor<*xf32>)
+
+Traits: ConstantLike
+
+Interfaces: NoSideEffect (MemoryEffectOpInterface)
+
+Effects: MemoryEffects::Effect{}
+
+#### Attributes:
+
+| Attribute | MLIR Type | Description |
+| :-------: | :-------: | ----------- |
+| `value` | ::mlir::UnitAttr | unit attribute
+
+#### Results:
+
+| Result | Description |
+| :----: | ----------- |
+| `none_val` | none type
 
 ### `onnx.Normalizer` (::mlir::ONNXNormalizerOp)
 

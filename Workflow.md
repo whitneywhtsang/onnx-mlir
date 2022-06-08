@@ -83,8 +83,8 @@ git clone --recursive https://github.com/<user>/onnx-mlir.git
 # or: git clone --recursive git@github.com:<user>/onnx-mlir.git
 
 cd $working_dir/onnx-mlir
-git remote add upstream https://github.com/onnx-mlir/onnx-mlir.git
-# or: git remote add upstream git@github.com:onnx-mlir/onnx-mlir.git
+git remote add upstream https://github.com/onnx/onnx-mlir.git
+# or: git remote add upstream git@github.com:onnx/onnx-mlir.git
 
 # Never push to upstream main since you do not have write access.
 git remote set-url --push upstream no_push
@@ -178,7 +178,7 @@ Specific testing help is provided in these pages to [run](TestingHighLevel.md) a
 
 ## Step 7: Commit & Push
 
-ONNX-MLIR requires committers to sign their code using the [Developer Certificate of Origin (DCO)](https://wiki.linuxfoundation.org/dco).
+ONNX-MLIR requires committers to sign their code using the [Developer Certificate of Origin (DCO)](https://developercertificate.org).
 THere is a one time setup to register your name and email.
 The commands are listed below, where you substitute your name and email address in the "John Doe" fields.
 
@@ -248,7 +248,7 @@ Your branch is now up to date with the latest ONNX-MLIR.
 
 ## Step 9: Create a pull request
 
-1. Visit your fork at https://github.com/<user>/onnx-mlir (replace `<user>` obviously).
+1. Visit your fork at `https://github.com/<user>/onnx-mlir` (replace `<user>` obviously).
 2. Click the `Compare & pull request` button next to your `my-branch` branch.
 
 ## Step 10: Get a code review
